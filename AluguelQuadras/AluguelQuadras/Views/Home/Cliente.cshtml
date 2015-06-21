@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AluguelQuadras.Models.Cliente>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron">
+
+<h1>Clientes</h1>
+
+<table class="lead" border="1" style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Endereço</th>
+        <th>Fone</th>
+        <th>E-Mail</th>
+        <th>Editar</th>
+        <th>Excluir</th>
+    </tr>
+    @foreach (var cliente in Model)
+    {
+        <tr>
+                    <td>@cliente.IdCliente</td>
+                    <td>@cliente.NomeCliente</td>
+                    <td>@cliente.EnderecoCliente</td>
+                    <td>@cliente.FoneCliente</td>
+                    <td>@cliente.EMailCliente</td>
+                    <td>@Html.ActionLink("Editar", "Edit", new { id = cliente.IdCliente })</td>
+                    <td>@Html.ActionLink("Excluir", "Delete", new { id = cliente.IdCliente })</td>
+        </tr>
+    }
+</table>
+
+
+
+    <p><a href="http://localhost:16062/Home/NovoCliente" class="btn btn-primary btn-large">Adicionar Novo Cliente&raquo;</a></p>
+</div>
