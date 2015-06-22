@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AluguelQuadras.Models.Quadra>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron">
+
+<h1>Quadras</h1>
+
+<table class="lead" border="1" style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Modalidade</th>
+        <th>Editar</th>
+        <th>Excluir</th>
+    </tr>
+    @foreach (var quadra in Model)
+    {
+        <tr>
+                    <td>@quadra.IdQuadra</td>
+                    <td>@quadra.NomeQuadra</td>
+                    <td>@quadra.ModalidadeQuadra</td>
+                    <td>@Html.ActionLink("Editar", "Edit", new { id = quadra.IdQuadra })</td>
+                    <td>@Html.ActionLink("Excluir", "Delete", new { id = quadra.IdQuadra })</td>
+        </tr>
+    }
+</table>
+
+
+
+    <p><a href="http://localhost:16062/Home/NovaQuadra" class="btn btn-primary btn-large">Adicionar Nova Quadra&raquo;</a></p>
+</div>

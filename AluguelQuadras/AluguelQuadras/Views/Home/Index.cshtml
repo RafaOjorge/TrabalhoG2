@@ -11,12 +11,8 @@
     <tr>
         <th>Id</th>
         <th>Quadra</th>
-        <th>Modalidade</th>
         <th>Valor</th>
         <th>Cliente</th>
-        <th>Endereço</th>
-        <th>Fone</th>
-        <th>E-Mail</th>
         <th>Data</th>
         <th>Editar</th>
         <th>Excluir</th>
@@ -25,13 +21,9 @@
     {
         <tr>
                     <td>@aluguel.IdAluguel</td>
-                    <td>@aluguel.NomeQuadra</td>
-                    <td>@aluguel.ModalidadeQuadra</td>
+                    <td>@Html.ActionLink(aluguel.NomeQuadra, "QuadraFiltro", new { nomeQuadra = aluguel.NomeQuadra })</td>
                     <td>R$ @aluguel.ValorAluguel</td>
-                    <td>@aluguel.NomeCliente</td>
-                    <td>@aluguel.EnderecoCliente</td>
-                    <td>@aluguel.FoneCliente</td>
-                    <td>@aluguel.EMailCliente</td>
+                    <td>@Html.ActionLink(aluguel.NomeCliente, "ClienteFiltro", new { nomeCliente = aluguel.NomeCliente })</td>
                     <td>@aluguel.DataAluguel.ToString("dd/MM/yyyy")</td>
                     <td>@Html.ActionLink("Editar", "Edit", new { id = aluguel.IdAluguel })</td>
                     <td>@Html.ActionLink("Excluir", "Delete", new { id = aluguel.IdAluguel })</td>

@@ -20,7 +20,15 @@ namespace AluguelQuadras.Controllers
         public ActionResult NovoAluguel()
         {
             ViewBag.Message = "Your application description page.";
+            ViewBag.ListaClientes = new SelectList
+            (
+                new Cliente().GetClientes(), "NomeCliente", "NomeCliente"
+            );
 
+            ViewBag.ListaQuadras = new SelectList
+            (
+                new Quadra().GetQuadras(), "NomeQuadra", "NomeQuadra"
+            );
             return View();
         }
 
@@ -28,6 +36,15 @@ namespace AluguelQuadras.Controllers
         public ActionResult NovoAluguel(Aluguel aluguel)
         {
             ViewBag.Message = "Your application description page.";
+            ViewBag.ListaClientes = new SelectList
+            (
+                new Cliente().GetClientes(), "NomeCliente", "NomeCliente"
+            );
+
+            ViewBag.ListaQuadras = new SelectList
+            (
+                new Quadra().GetQuadras(), "NomeQuadra", "NomeQuadra"
+            );
 
             if (ModelState.IsValid)
             {
@@ -38,6 +55,15 @@ namespace AluguelQuadras.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult ClienteFiltro(string nomeCliente)
+        {
+            Cliente cliente = new Cliente();
+            var clientes = cliente.GetClientesPorNome(nomeCliente);
+
+            return View(clientes);
         }
 
         public ActionResult Cliente()
@@ -65,6 +91,46 @@ namespace AluguelQuadras.Controllers
                 Cliente novo = new Cliente();
 
                 novo.Novo(cliente);
+
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult QuadraFiltro(string nomeQuadra)
+        {
+            Quadra quadra = new Quadra();
+            var quadras = quadra.GetQuadrasPorNome(nomeQuadra);
+
+            return View(quadras);
+        }
+
+        public ActionResult Quadra()
+        {
+            Quadra quadra = new Quadra();
+            var quadras = quadra.GetQuadras();
+
+            return View(quadras);
+        }
+
+        public ActionResult NovaQuadra()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NovaQuadra(Quadra quadra)
+        {
+            ViewBag.Message = "Your application description page.";
+
+            if (ModelState.IsValid)
+            {
+                Quadra novo = new Quadra();
+
+                novo.Novo(quadra);
 
                 return RedirectToAction("Index");
             }

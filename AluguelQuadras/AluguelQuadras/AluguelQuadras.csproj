@@ -164,6 +164,10 @@
     <Content Include="Views\Home\NovoAluguel.cshtml" />
     <Content Include="Views\Home\Cliente.cshtml" />
     <Content Include="Views\Home\NovoCliente.cshtml" />
+    <Content Include="Views\Home\Quadra.cshtml" />
+    <Content Include="Views\Home\NovaQuadra.cshtml" />
+    <Content Include="Views\Home\ClienteFiltro.cshtml" />
+    <Content Include="Views\Home\QuadraFiltro.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

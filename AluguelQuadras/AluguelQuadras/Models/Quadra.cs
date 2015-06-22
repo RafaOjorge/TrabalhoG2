@@ -37,5 +37,47 @@ namespace AluguelQuadras.Models
             }
             return listaQuadras;
         }
+
+        public List<Quadra> GetQuadrasPorNome(string nome)
+        {
+            StringBuilder sql = new StringBuilder();
+            List<Quadra> listaQuadras = new List<Quadra>();
+
+            sql.Append("SELECT * ");
+            sql.Append("FROM quadras WHERE nome='");
+            sql.Append(nome);
+            sql.Append("'");
+            MySqlDataReader dr = Conexao.Get(sql.ToString());
+
+            while (dr.Read())
+            {
+                listaQuadras.Add(new Quadra
+                {
+                    IdQuadra = dr.GetInt32(0),
+                    NomeQuadra = dr.GetString(1),
+                    ModalidadeQuadra = dr.GetString(2),
+                });
+            }
+            return listaQuadras;
+        }
+
+        public void Novo(Quadra pQuadra)
+        {
+            StringBuilder sql = new StringBuilder();
+            MySqlCommand cmd = new MySqlCommand();
+
+            sql.Append("Insert into quadras (nome, modalidade) ");
+            sql.Append(" Values (@nome, @modalidade) ");
+
+            //cmd.Parameters.AddWithValue("@id", "");
+            cmd.Parameters.AddWithValue("@nome", pQuadra.NomeQuadra);
+            cmd.Parameters.AddWithValue("@modalidade", pQuadra.ModalidadeQuadra);
+
+            cmd.CommandText = sql.ToString();
+
+            //passando o command para a dll conn resolver a persistência
+            Conexao.CommandPersist(cmd);
+        }
+
     }
 }

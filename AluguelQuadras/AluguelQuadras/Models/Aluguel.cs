@@ -32,13 +32,9 @@ namespace AluguelQuadras.Models
                 {
                     IdAluguel = dr.GetInt32(0),
                     NomeQuadra = dr.GetString(1),
-                    ModalidadeQuadra = dr.GetString(2),
-                    ValorAluguel = dr.GetDouble(3),
-                    NomeCliente = dr.GetString(4),
-                    EnderecoCliente = dr.GetString(5),
-                    FoneCliente = dr.GetString(6),
-                    EMailCliente = dr.GetString(7),
-                    DataAluguel = dr.GetDateTime(8),
+                    ValorAluguel = dr.GetDouble(2),
+                    NomeCliente = dr.GetString(3),
+                    DataAluguel = dr.GetDateTime(4),
                 });
             }
             return listaAlugueis;
@@ -49,17 +45,13 @@ namespace AluguelQuadras.Models
             StringBuilder sql = new StringBuilder();
             MySqlCommand cmd = new MySqlCommand();
 
-            sql.Append("Insert into alugueis (nomeQuadra, modalidadeQuadra, valorAluguel, nomeCliente, enderecoCliente, foneCliente, emailCliente, dataAluguel) ");
-            sql.Append(" Values (@nomeQuadra, @modalidadeQuadra, @valorAluguel, @nomeCliente, @enderecoCliente, @foneCliente, @emailCliente, @dataAluguel) ");
+            sql.Append("Insert into alugueis (nomeQuadra, valorAluguel, nomeCliente, dataAluguel) ");
+            sql.Append(" Values (@nomeQuadra, @valorAluguel, @nomeCliente, @dataAluguel) ");
 
             //cmd.Parameters.AddWithValue("@id", "");
             cmd.Parameters.AddWithValue("@nomeQuadra", pAluguel.NomeQuadra);
-            cmd.Parameters.AddWithValue("@modalidadeQuadra", pAluguel.ModalidadeQuadra);
             cmd.Parameters.AddWithValue("@valorAluguel", pAluguel.ValorAluguel);
             cmd.Parameters.AddWithValue("@nomeCliente", pAluguel.NomeCliente);
-            cmd.Parameters.AddWithValue("@enderecoCliente", pAluguel.EnderecoCliente);
-            cmd.Parameters.AddWithValue("@foneCliente", pAluguel.FoneCliente);
-            cmd.Parameters.AddWithValue("@emailCliente", pAluguel.EMailCliente);
             cmd.Parameters.AddWithValue("@dataAluguel", pAluguel.DataAluguel);
 
             cmd.CommandText = sql.ToString();

@@ -42,6 +42,31 @@ namespace AluguelQuadras.Models
             return listaClientes;
         }
 
+        public List<Cliente> GetClientesPorNome(string nome)
+        {
+            StringBuilder sql = new StringBuilder();
+            List<Cliente> listaClientes = new List<Cliente>();
+
+            sql.Append("SELECT * ");
+            sql.Append("FROM clientes WHERE nome='");
+            sql.Append(nome);
+            sql.Append("'");
+            MySqlDataReader dr = Conexao.Get(sql.ToString());
+
+            while (dr.Read())
+            {
+                listaClientes.Add(new Cliente
+                {
+                    IdCliente = dr.GetInt32(0),
+                    NomeCliente = dr.GetString(1),
+                    EnderecoCliente = dr.GetString(2),
+                    FoneCliente = dr.GetString(3),
+                    EMailCliente = dr.GetString(4),
+                });
+            }
+            return listaClientes;
+        }
+
         public void Novo(Cliente pCliente)
         {
             StringBuilder sql = new StringBuilder();
