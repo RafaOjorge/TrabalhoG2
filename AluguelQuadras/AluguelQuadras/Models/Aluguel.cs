@@ -12,8 +12,17 @@ namespace AluguelQuadras.Models
 {
     public class Aluguel : Quadra
     {
+        [Display(Name = "Id:")]
         public int IdAluguel { get; set; }
+
+        [Display(Name = "Valor à Pagar:")]
+        [Required(ErrorMessage = "Informe um valor")]
         public double ValorAluguel { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Data de Leitura. Ex.: 01/01/2000:")]
+        [Required(ErrorMessage = "Informe uma data")]
         public DateTime DataAluguel { get; set; }
 
         public List<Aluguel> GetAlugueis()

@@ -12,8 +12,15 @@ namespace AluguelQuadras.Models
 {
     public class Quadra : Cliente
     {
+        [Display(Name = "Id:")]
         public int IdQuadra { get; set; }
+
+        [Display(Name = "Nome:")]
+        [Required(ErrorMessage = "Informe um nome.")]
         public string NomeQuadra { get; set; }
+
+        [Display(Name = "Modalidade:")]
+        [Required(ErrorMessage = "Informe uma modalidade.")]
         public string ModalidadeQuadra { get; set; }
 
         public List<Quadra> GetQuadras()

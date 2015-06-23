@@ -12,10 +12,24 @@ namespace AluguelQuadras.Models
 {
     public class Cliente
     {
+        [Display(Name = "Id:")]
         public int IdCliente { get; set; }
+
+        [Display(Name = "Nome:")]
+        [Required(ErrorMessage = "Informe um nome.")]
         public string NomeCliente { get; set; }
+
+        [Display(Name = "Endereço:")]
+        [Required(ErrorMessage = "Informe um endereço.")]
         public string EnderecoCliente { get; set; }
+
+        [Display(Name = "Telefone:")]
+        [Required(ErrorMessage = "Informe um telefone.")]
         public string FoneCliente { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "E-Mail:")]
+        [Required(ErrorMessage = "Informe um e-mail.")]
         public string EMailCliente { get; set; }
 
         public List<Cliente> GetClientes()
