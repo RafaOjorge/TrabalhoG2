@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AluguelQuadras.Models;
+using AluguelQuadras.Models.Entity;
+using AluguelQuadras.Models.Repository;
 
 namespace AluguelQuadras.Controllers
 {
@@ -11,7 +13,7 @@ namespace AluguelQuadras.Controllers
     {
         public ActionResult Index()
         {
-            Aluguel aluguel = new Aluguel();
+            AluguelRepository aluguel = new AluguelRepository();
             var alugueis = aluguel.GetAlugueis();
 
             return View(alugueis);
@@ -22,12 +24,12 @@ namespace AluguelQuadras.Controllers
             ViewBag.Message = "Your application description page.";
             ViewBag.ListaClientes = new SelectList
             (
-                new Cliente().GetClientes(), "NomeCliente", "NomeCliente"
+                new ClienteRepository().GetClientes(), "NomeCliente", "NomeCliente"
             );
 
             ViewBag.ListaQuadras = new SelectList
             (
-                new Quadra().GetQuadras(), "NomeQuadra", "NomeQuadra"
+                new QuadraRepository().GetQuadras(), "NomeQuadra", "NomeQuadra"
             );
             return View();
         }
@@ -38,17 +40,17 @@ namespace AluguelQuadras.Controllers
             ViewBag.Message = "Your application description page.";
             ViewBag.ListaClientes = new SelectList
             (
-                new Cliente().GetClientes(), "NomeCliente", "NomeCliente"
+                new ClienteRepository().GetClientes(), "NomeCliente", "NomeCliente"
             );
 
             ViewBag.ListaQuadras = new SelectList
             (
-                new Quadra().GetQuadras(), "NomeQuadra", "NomeQuadra"
+                new QuadraRepository().GetQuadras(), "NomeQuadra", "NomeQuadra"
             );
 
             if (ModelState.IsValid)
             {
-                Aluguel novo = new Aluguel();
+                AluguelRepository novo = new AluguelRepository();
 
                 novo.Novo(aluguel);
 
@@ -60,7 +62,7 @@ namespace AluguelQuadras.Controllers
         [HttpGet]
         public ActionResult ClienteFiltro(string nomeCliente)
         {
-            Cliente cliente = new Cliente();
+            ClienteRepository cliente = new ClienteRepository();
             var clientes = cliente.GetClientesPorNome(nomeCliente);
 
             return View(clientes);
@@ -68,7 +70,7 @@ namespace AluguelQuadras.Controllers
 
         public ActionResult Cliente()
         {
-            Cliente cliente = new Cliente();
+            ClienteRepository cliente = new ClienteRepository();
             var clientes = cliente.GetClientes();
 
             return View(clientes);
@@ -88,7 +90,7 @@ namespace AluguelQuadras.Controllers
 
             if (ModelState.IsValid)
             {
-                Cliente novo = new Cliente();
+                ClienteRepository novo = new ClienteRepository();
 
                 novo.Novo(cliente);
 
@@ -100,7 +102,7 @@ namespace AluguelQuadras.Controllers
         [HttpGet]
         public ActionResult QuadraFiltro(string nomeQuadra)
         {
-            Quadra quadra = new Quadra();
+            QuadraRepository quadra = new QuadraRepository();
             var quadras = quadra.GetQuadrasPorNome(nomeQuadra);
 
             return View(quadras);
@@ -108,7 +110,7 @@ namespace AluguelQuadras.Controllers
 
         public ActionResult Quadra()
         {
-            Quadra quadra = new Quadra();
+            QuadraRepository quadra = new QuadraRepository();
             var quadras = quadra.GetQuadras();
 
             return View(quadras);
@@ -128,7 +130,7 @@ namespace AluguelQuadras.Controllers
 
             if (ModelState.IsValid)
             {
-                Quadra novo = new Quadra();
+                QuadraRepository novo = new QuadraRepository();
 
                 novo.Novo(quadra);
 
@@ -137,18 +139,5 @@ namespace AluguelQuadras.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

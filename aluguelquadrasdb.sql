@@ -106,3 +106,12 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2015-06-21 23:59:14
+
+create table admin(
+idAdmin integer not null auto_increment,
+login varchar(10),
+senha varchar(10),
+primary key (idAdmin));
+
+insert into admin
+values (1, 'admin', 'teste');
