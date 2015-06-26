@@ -17,7 +17,7 @@ namespace AluguelQuadrasDAO
                                         ";Port=3306" +
                                         ";Database=aluguelquadrasdb" +
                                         ";Uid=root" +
-                                        ";Pwd=021293";
+                                        ";Pwd=root";
         public static bool Connect()
         {
             if (conn.State == System.Data.ConnectionState.Closed)

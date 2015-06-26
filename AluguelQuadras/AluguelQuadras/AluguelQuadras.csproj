@@ -51,12 +51,24 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -125,13 +137,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Entity\Admin.cs" />
-    <Compile Include="Models\Entity\Aluguel.cs" />
-    <Compile Include="Models\Entity\Cliente.cs" />
-    <Compile Include="Models\Entity\Quadra.cs" />
-    <Compile Include="Models\Repository\AluguelRepository.cs" />
-    <Compile Include="Models\Repository\ClienteRepository.cs" />
-    <Compile Include="Models\Repository\QuadraRepository.cs" />
+    <Compile Include="Models\Aluguel.cs" />
+    <Compile Include="Models\Autenticacao.cs" />
+    <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Quadra.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +155,8 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.uploadify.js" />
+    <Content Include="Scripts\jquery.uploadify.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -161,7 +172,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Aluguel.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\NovoAluguel.cshtml" />
     <Content Include="Views\Home\Cliente.cshtml" />
@@ -170,6 +183,14 @@
     <Content Include="Views\Home\NovaQuadra.cshtml" />
     <Content Include="Views\Home\ClienteFiltro.cshtml" />
     <Content Include="Views\Home\QuadraFiltro.cshtml" />
+    <Content Include="Views\Home\_LayoutLogin.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\EditaAluguel.cshtml" />
+    <Content Include="Views\Home\EditaCliente.cshtml" />
+    <Content Include="Views\Home\EditaQuadra.cshtml" />
+    <Content Include="Views\Home\DeleteAluguel.cshtml" />
+    <Content Include="Views\Home\DeleteQuadra.cshtml" />
+    <Content Include="Views\Home\DeleteCliente.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

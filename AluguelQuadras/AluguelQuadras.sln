@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AluguelQuadras", "AluguelQu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AluguelQuadrasDAO", "AluguelQuadrasDAO\AluguelQuadrasDAO.csproj", "{FBF6F87D-30B6-4C1E-AB8B-6B1A46575A42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AluguelQuadrasAPI", "AluguelQuadrasAPI\AluguelQuadrasAPI.csproj", "{986952C2-0878-4537-B142-F31179AA7D5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{FBF6F87D-30B6-4C1E-AB8B-6B1A46575A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBF6F87D-30B6-4C1E-AB8B-6B1A46575A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBF6F87D-30B6-4C1E-AB8B-6B1A46575A42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{986952C2-0878-4537-B142-F31179AA7D5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{986952C2-0878-4537-B142-F31179AA7D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{986952C2-0878-4537-B142-F31179AA7D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{986952C2-0878-4537-B142-F31179AA7D5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

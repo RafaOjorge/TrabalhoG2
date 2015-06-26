@@ -100,5 +100,42 @@ namespace AluguelQuadras.Models
             //passando o command para a dll conn resolver a persistência
             Conexao.CommandPersist(cmd);
         }
+
+        public void Editar(Cliente pCliente)
+        {
+            StringBuilder sql = new StringBuilder();
+            MySqlCommand cmd = new MySqlCommand();
+
+            sql.Append("UPDATE clientes ");
+            sql.Append("SET id = @id, nome = @nome, endereco = @endereco, fone = @fone, email = @email ");
+            sql.Append("WHERE id = @id ");
+
+            cmd.Parameters.AddWithValue("@id", pCliente.IdCliente);
+            cmd.Parameters.AddWithValue("@nome", pCliente.NomeCliente);
+            cmd.Parameters.AddWithValue("@endereco", pCliente.EnderecoCliente);
+            cmd.Parameters.AddWithValue("@fone", pCliente.FoneCliente);
+            cmd.Parameters.AddWithValue("@email", pCliente.EMailCliente);
+
+            cmd.CommandText = sql.ToString();
+
+            //passando o command para a dll conn resolver a persistência
+            Conexao.CommandPersist(cmd);
+        }
+
+        public void Delete(int pId)
+        {
+            StringBuilder sql = new StringBuilder();
+            MySqlCommand cmd = new MySqlCommand();
+
+            sql.Append("DELETE FROM clientes");
+            sql.Append(" WHERE id = @_id");
+
+            cmd.Parameters.AddWithValue("@_id", pId);
+
+            cmd.CommandText = sql.ToString();
+
+            //passando o command para a dll conn resolver a persistência
+            Conexao.CommandPersist(cmd);
+        }
     }
 }

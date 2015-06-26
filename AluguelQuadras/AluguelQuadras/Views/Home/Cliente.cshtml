@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AluguelQuadras.Models.Entity.Cliente>
+﻿@model IEnumerable<AluguelQuadras.Models.Cliente>
 @{
     ViewBag.Title = "Index";
 }
@@ -25,8 +25,8 @@
                     <td>@cliente.EnderecoCliente</td>
                     <td>@cliente.FoneCliente</td>
                     <td>@cliente.EMailCliente</td>
-                    <td>@Html.ActionLink("Editar", "Edit", new { id = cliente.IdCliente })</td>
-                    <td>@Html.ActionLink("Excluir", "Delete", new { id = cliente.IdCliente })</td>
+                    <td>@Html.ActionLink("Editar", "EditaCliente", new { id = cliente.IdCliente })</td>
+                    <td>@Html.ActionLink("Excluir", "DeleteCliente", new { id = cliente.IdCliente })</td>
         </tr>
     }
 </table>

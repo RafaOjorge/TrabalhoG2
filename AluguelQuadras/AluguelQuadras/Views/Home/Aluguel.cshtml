@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AluguelQuadras.Models.Aluguel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron">
+
+<h1>Alugueis</h1>
+
+<table class="lead" border="1" style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Quadra</th>
+        <th>Valor</th>
+        <th>Cliente</th>
+        <th>Data</th>
+        <th>Editar</th>
+        <th>Excluir</th>
+    </tr>
+    @foreach (var aluguel in Model)
+    {
+        <tr>
+                    <td>@aluguel.IdAluguel</td>
+                    <td>@Html.ActionLink(aluguel.NomeQuadra, "QuadraFiltro", new { nomeQuadra = aluguel.NomeQuadra })</td>
+                    <td>R$ @aluguel.ValorAluguel</td>
+                    <td>@Html.ActionLink(aluguel.NomeCliente, "ClienteFiltro", new { nomeCliente = aluguel.NomeCliente })</td>
+                    <td>@aluguel.DataAluguel.ToString("dd/MM/yyyy")</td>
+                    <td>@Html.ActionLink("Editar", "EditaAluguel", new { id = aluguel.IdAluguel })</td>
+                    <td>@Html.ActionLink("Excluir", "DeleteAluguel", new { id = aluguel.IdAluguel })</td>
+        </tr>
+    }
+</table>
+
+
+
+    <p><a href="http://localhost:16062/Home/NovoAluguel" class="btn btn-primary btn-large">Adicionar Novo Aluguel&raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Mantenha Quadras</h2>
+        <p>
+            Adicione, edite, exclua e visualize suas Quadras.
+        </p>
+        <p><a class="btn btn-default" href="http://localhost:16062/Home/Quadra">Mais...</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Mantenha Clientes</h2>
+        <p>
+            Adicione, edite, exclua e visualize seus Clientes.
+        </p>
+        <p><a class="btn btn-default" href="http://localhost:16062/Home/Cliente">Mais...</a></p>
+    </div>
+</div>

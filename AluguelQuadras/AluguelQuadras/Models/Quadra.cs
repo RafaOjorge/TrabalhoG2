@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AluguelQuadras.Models
 {
-    public class Quadra : Cliente
+    public class Quadra
     {
         [Display(Name = "Id:")]
         public int IdQuadra { get; set; }
@@ -86,5 +86,39 @@ namespace AluguelQuadras.Models
             Conexao.CommandPersist(cmd);
         }
 
+        public void Editar(Quadra pQuadra)
+        {
+            StringBuilder sql = new StringBuilder();
+            MySqlCommand cmd = new MySqlCommand();
+
+            sql.Append("UPDATE quadras ");
+            sql.Append("SET id = @id, nome = @nome, modalidade = @modalidade ");
+            sql.Append("WHERE id = @id ");
+
+            cmd.Parameters.AddWithValue("@id", pQuadra.IdQuadra);
+            cmd.Parameters.AddWithValue("@nome", pQuadra.NomeQuadra);
+            cmd.Parameters.AddWithValue("@modalidade", pQuadra.ModalidadeQuadra);
+
+            cmd.CommandText = sql.ToString();
+
+            //passando o command para a dll conn resolver a persistência
+            Conexao.CommandPersist(cmd);
+        }
+
+        public void Delete(int pId)
+        {
+            StringBuilder sql = new StringBuilder();
+            MySqlCommand cmd = new MySqlCommand();
+
+            sql.Append("DELETE FROM quadras");
+            sql.Append(" WHERE id = @_id");
+
+            cmd.Parameters.AddWithValue("@_id", pId);
+
+            cmd.CommandText = sql.ToString();
+
+            //passando o command para a dll conn resolver a persistência
+            Conexao.CommandPersist(cmd);
+        }
     }
 }

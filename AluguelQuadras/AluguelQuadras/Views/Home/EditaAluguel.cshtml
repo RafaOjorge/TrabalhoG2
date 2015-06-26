@@ -1,0 +1,55 @@
+﻿@model AluguelQuadras.Models.Aluguel
+@{
+    ViewBag.Title = "Novo";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<h1>Modifique os dados do aluguel numero @ViewBag.TextoId</h1>
+<br />
+<br />
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group" >
+            <p style="margin-left:130px;font-weight:bold;"> Selecione um Cliente:
+            @Html.DropDownListFor(model => model.NomeCliente, (SelectList)ViewBag.ListaClientes)
+            @Html.ValidationMessageFor(model => model.NomeCliente, "", new { @class = "text-danger" })</p>
+        </div>
+
+        <div class="form-group" >
+            <p style="margin-left:120px;font-weight:bold;">Selecione uma Quadra:
+            @Html.DropDownListFor(model => model.NomeQuadra, (SelectList)ViewBag.ListaQuadras)
+            @Html.ValidationMessageFor(model => model.NomeQuadra, "", new { @class = "text-danger" })</p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValorAluguel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ValorAluguel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ValorAluguel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataAluguel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DataAluguel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DataAluguel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Inserir" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+}

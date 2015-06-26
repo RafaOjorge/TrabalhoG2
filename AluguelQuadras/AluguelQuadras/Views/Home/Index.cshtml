@@ -1,59 +1,44 @@
-﻿@model IEnumerable<AluguelQuadras.Models.Entity.Aluguel>
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    Layout = "_LayoutLogin.cshtml";
 }
 
-<div class="jumbotron">
-
-<h1>Alugueis</h1>
-
-<table class="lead" border="1" style="width:100%">
-    <tr>
-        <th>Id</th>
-        <th>Quadra</th>
-        <th>Valor</th>
-        <th>Cliente</th>
-        <th>Data</th>
-        <th>Editar</th>
-        <th>Excluir</th>
-    </tr>
-    @foreach (var aluguel in Model)
-    {
-        <tr>
-                    <td>@aluguel.IdAluguel</td>
-                    <td>@Html.ActionLink(aluguel.NomeQuadra, "QuadraFiltro", new { nomeQuadra = aluguel.NomeQuadra })</td>
-                    <td>R$ @aluguel.ValorAluguel</td>
-                    <td>@Html.ActionLink(aluguel.NomeCliente, "ClienteFiltro", new { nomeCliente = aluguel.NomeCliente })</td>
-                    <td>@aluguel.DataAluguel.ToString("dd/MM/yyyy")</td>
-                    <td>@Html.ActionLink("Editar", "Edit", new { id = aluguel.IdAluguel })</td>
-                    <td>@Html.ActionLink("Excluir", "Delete", new { id = aluguel.IdAluguel })</td>
-        </tr>
-    }
-</table>
-
-
-
-    <p><a href="http://localhost:16062/Home/NovoAluguel" class="btn btn-primary btn-large">Adicionar Novo Aluguel&raquo;</a></p>
+<div id="BoxTitulo">
+    <h1>
+        Bem vindo(a)!
+    </h1>
+</div>
+<div id="BoxFormsGeral">
+    <div id="BoxFormLogin">
+        <fieldset>
+            <legend>Informe seus dados</legend>
+            <form method="post" action="/Home/Index" id="frmLogin">
+                <table style="margin-top:10px;">
+                    <tr>
+                        <td>
+                            Usuário:
+                        </td>
+                        <td>
+                            <input type="text" name="usuario" id="usuario" maxlength="20" class="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Senha:
+                        </td>
+                        <td>
+                            <input type="password" name="senha" id="senha" maxlength="10" class="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            <input class="btn btn-default" type="submit" name="btnEntrar" id="btnEntrar" value="Entrar" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </fieldset>
+    </div>
+    <h3 style="color:red;">@ViewBag.MensagemDeErro</h3>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

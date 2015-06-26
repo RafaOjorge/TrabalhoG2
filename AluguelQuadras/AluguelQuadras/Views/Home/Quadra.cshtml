@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AluguelQuadras.Models.Entity.Quadra>
+﻿@model IEnumerable<AluguelQuadras.Models.Quadra>
 @{
     ViewBag.Title = "Index";
 }
@@ -21,8 +21,8 @@
                     <td>@quadra.IdQuadra</td>
                     <td>@quadra.NomeQuadra</td>
                     <td>@quadra.ModalidadeQuadra</td>
-                    <td>@Html.ActionLink("Editar", "Edit", new { id = quadra.IdQuadra })</td>
-                    <td>@Html.ActionLink("Excluir", "Delete", new { id = quadra.IdQuadra })</td>
+                    <td>@Html.ActionLink("Editar", "EditaQuadra", new { id = quadra.IdQuadra })</td>
+                    <td>@Html.ActionLink("Excluir", "DeleteQuadra", new { id = quadra.IdQuadra })</td>
         </tr>
     }
 </table>

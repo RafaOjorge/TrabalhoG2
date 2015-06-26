@@ -4,140 +4,291 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AluguelQuadras.Models;
-using AluguelQuadras.Models.Entity;
-using AluguelQuadras.Models.Repository;
+using System.IO;
 
 namespace AluguelQuadras.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
-            AluguelRepository aluguel = new AluguelRepository();
-            var alugueis = aluguel.GetAlugueis();
+            return View();
+        }
 
-            return View(alugueis);
+        [HttpPost]
+        public ActionResult Index(string usuario, string senha)
+        {
+            Autenticacao autentica = new Autenticacao();
+            var isValido = autentica.isValido(usuario, senha);
+            if (isValido == true)
+            {
+                @TempData["Logado"] = "true";
+                return RedirectToAction("Aluguel");
+            }
+            ViewBag.MensagemDeErro = "Usuário ou senha inválidos";
+            @TempData["Logado"] = "false";
+            return View();
+        }
+
+        public ActionResult Aluguel()
+        {
+            if (@TempData["Logado"].Equals("true"))
+            {
+                Aluguel aluguel = new Aluguel();
+                var alugueis = aluguel.GetAlugueis();
+                @TempData["Logado"] = "true";
+                return View(alugueis);
+            }
+            return View();
         }
 
         public ActionResult NovoAluguel()
         {
-            ViewBag.Message = "Your application description page.";
-            ViewBag.ListaClientes = new SelectList
-            (
-                new ClienteRepository().GetClientes(), "NomeCliente", "NomeCliente"
-            );
+            if (@TempData["Logado"].Equals("true"))
+            {
+                @TempData["Logado"] = "true";
+                ViewBag.ListaClientes = new SelectList
+                (
+                    new Cliente().GetClientes(), "NomeCliente", "NomeCliente"
+                );
 
-            ViewBag.ListaQuadras = new SelectList
-            (
-                new QuadraRepository().GetQuadras(), "NomeQuadra", "NomeQuadra"
-            );
+                ViewBag.ListaQuadras = new SelectList
+                (
+                    new Quadra().GetQuadras(), "NomeQuadra", "NomeQuadra"
+                );
+                return View();
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult NovoAluguel(Aluguel aluguel)
         {
-            ViewBag.Message = "Your application description page.";
+            if (@TempData["Logado"].Equals("true"))
+            {
+                @TempData["Logado"] = "true";
+                ViewBag.ListaClientes = new SelectList
+                (
+                    new Cliente().GetClientes(), "NomeCliente", "NomeCliente"
+                );
+
+                ViewBag.ListaQuadras = new SelectList
+                (
+                    new Quadra().GetQuadras(), "NomeQuadra", "NomeQuadra"
+                );
+
+                if (ModelState.IsValid)
+                {
+                    Aluguel novo = new Aluguel();
+
+                    novo.Novo(aluguel);
+
+                    return RedirectToAction("Aluguel");
+                }
+                return View();
+            }
+            return View();
+        }
+
+        public ActionResult EditaAluguel(int id)
+        {
+            ViewBag.TextoId = id;
+            TempData["id"] = id;
             ViewBag.ListaClientes = new SelectList
             (
-                new ClienteRepository().GetClientes(), "NomeCliente", "NomeCliente"
+                new Cliente().GetClientes(), "NomeCliente", "NomeCliente"
             );
 
             ViewBag.ListaQuadras = new SelectList
             (
-                new QuadraRepository().GetQuadras(), "NomeQuadra", "NomeQuadra"
+                new Quadra().GetQuadras(), "NomeQuadra", "NomeQuadra"
             );
-
-            if (ModelState.IsValid)
-            {
-                AluguelRepository novo = new AluguelRepository();
-
-                novo.Novo(aluguel);
-
-                return RedirectToAction("Index");
-            }
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditaAluguel(Aluguel pAluguel)
+        {
+            pAluguel.IdAluguel = (int)TempData["id"];
+            Aluguel nova = new Aluguel();
+
+            nova.Editar(pAluguel);
+
+            return RedirectToAction("Aluguel");
+        }
+
+        public ActionResult DeleteAluguel(int id)
+        {
+            Aluguel nova = new Aluguel();
+
+            nova.Delete(id);
+
+            return RedirectToAction("Aluguel");
         }
 
         [HttpGet]
         public ActionResult ClienteFiltro(string nomeCliente)
         {
-            ClienteRepository cliente = new ClienteRepository();
-            var clientes = cliente.GetClientesPorNome(nomeCliente);
-
-            return View(clientes);
+            if (@TempData["Logado"].Equals("true"))
+            {
+                @TempData["Logado"] = "true";
+                Cliente cliente = new Cliente();
+                var clientes = cliente.GetClientesPorNome(nomeCliente);
+                return View(clientes);
+            }
+            return View();
         }
 
         public ActionResult Cliente()
         {
-            ClienteRepository cliente = new ClienteRepository();
-            var clientes = cliente.GetClientes();
-
-            return View(clientes);
+            if (@TempData["Logado"].Equals("true"))
+            {
+                @TempData["Logado"] = "true";
+                Cliente cliente = new Cliente();
+                var clientes = cliente.GetClientes();
+                return View(clientes);
+            }
+            return View();
         }
 
         public ActionResult NovoCliente()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         [HttpPost]
         public ActionResult NovoCliente(Cliente cliente)
         {
-            ViewBag.Message = "Your application description page.";
-
-            if (ModelState.IsValid)
+            if (@TempData["Logado"].Equals("true"))
             {
-                ClienteRepository novo = new ClienteRepository();
+                @TempData["Logado"] = "true";
+                if (ModelState.IsValid)
+                {
+                    Cliente novo = new Cliente();
 
-                novo.Novo(cliente);
+                    novo.Novo(cliente);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Cliente");
+                }
+                return View();
             }
             return View();
+        }
+
+        public ActionResult EditaCliente(int id)
+        {
+            ViewBag.TextoId = id;
+            TempData["id"] = id;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditaCliente(Cliente pCliente)
+        {
+            pCliente.IdCliente = (int)TempData["id"];
+            Cliente nova = new Cliente();
+
+            nova.Editar(pCliente);
+
+            return RedirectToAction("Cliente");
+        }
+
+        public ActionResult DeleteCliente(int id)
+        {
+            Cliente nova = new Cliente();
+
+            nova.Delete(id);
+
+            return RedirectToAction("Cliente");
         }
 
         [HttpGet]
         public ActionResult QuadraFiltro(string nomeQuadra)
         {
-            QuadraRepository quadra = new QuadraRepository();
-            var quadras = quadra.GetQuadrasPorNome(nomeQuadra);
-
-            return View(quadras);
+            if (@TempData["Logado"].Equals("true"))
+            {
+                @TempData["Logado"] = "true";
+                Quadra quadra = new Quadra();
+                var quadras = quadra.GetQuadrasPorNome(nomeQuadra);
+                return View(quadras);
+            }
+            return View();
         }
 
         public ActionResult Quadra()
         {
-            QuadraRepository quadra = new QuadraRepository();
-            var quadras = quadra.GetQuadras();
-
-            return View(quadras);
+            if (@TempData["Logado"].Equals("true"))
+            {
+                @TempData["Logado"] = "true";
+                Quadra quadra = new Quadra();
+                var quadras = quadra.GetQuadras();
+                return View(quadras);
+            }
+            return View();
         }
 
         public ActionResult NovaQuadra()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         [HttpPost]
         public ActionResult NovaQuadra(Quadra quadra)
         {
-            ViewBag.Message = "Your application description page.";
-
-            if (ModelState.IsValid)
+            if (@TempData["Logado"].Equals("true"))
             {
-                QuadraRepository novo = new QuadraRepository();
+                @TempData["Logado"] = "true";
+                if (ModelState.IsValid)
+                {
+                    Quadra novo = new Quadra();
 
-                novo.Novo(quadra);
+                    novo.Novo(quadra);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Quadra");
+                }
+                return View();
             }
             return View();
         }
 
+        public ActionResult EditaQuadra(int id)
+        {
+            ViewBag.TextoId = id;
+            TempData["id"] = id;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditaQuadra(Quadra pQuadra)
+        {
+            pQuadra.IdQuadra = (int)TempData["id"];
+            Quadra nova = new Quadra();
+
+            nova.Editar(pQuadra);
+
+            return RedirectToAction("Quadra");
+        }
+
+        public ActionResult DeleteQuadra(int id)
+        {
+            Quadra nova = new Quadra();
+
+            nova.Delete(id);
+
+            return RedirectToAction("Quadra");
+        }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }
